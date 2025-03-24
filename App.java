@@ -29,12 +29,12 @@ public class App {
         System.out.println("2. Bank Transfer");
         System.out.println("3. Cash");
         System.out.print("Masukkan pilihan (1-3): ");
+        int PaymentChoice = scanner.nextInt();
+        scanner.nextLine(); // Tambahkan ini untuk menghindari bug input buffer
         System.out.println("\n========================================");
 
-        int PaymentChoice = scanner.nextInt();
         Payment payment = null;
 
-       
         switch (PaymentChoice) {
             case 1:
                 payment = new Ewallet(10000000, "Dana");
@@ -51,7 +51,13 @@ public class App {
         }
 
         // Memproses pembayaran berdasarkan pilihan pengguna
-        payment.processPayment();
+        if (payment instanceof CashPayment) {
+            System.out.print("Masukkan nama kasir: ");
+            String cashierName = scanner.nextLine();
+            ((CashPayment) payment).processPayment(cashierName); // Panggil versi overloading
+        } else {
+            payment.processPayment();
+        }
 
         // Menampilkan informasi anjing yang dibeli
         System.out.println("\n========Informasi Anjing yang Dibeli:========");
