@@ -1,7 +1,7 @@
 public class CashPayment extends Payment {
 
-    public CashPayment(int amount) {
-        super(amount);
+    public CashPayment(int amount) { // Tetap pakai int di sini
+        super((double) amount); // Konversi ke double saat memanggil konstruktor superclass
     }
 
     @Override
